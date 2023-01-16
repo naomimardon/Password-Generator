@@ -88,18 +88,19 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-
 let criteriaArray = [];
-console.log("criteriaArray: " + criteriaArray);
 
 
 // Function to prompt user for password options
-function getPasswordOptions() {
-  let passwordLength = prompt("Type a number between 10 and 64 to choose the length of your password.\n\nThen click OK.");
-  console.log("passwordLength: " + Number(passwordLength));
-  if (!(passwordLength > 9) || !(passwordLength < 65) || !Number.isInteger(Number(passwordLength))) {
+function generatePassword() {
+  let lengthPrompt = prompt("Type a number between 10 and 64 to choose the length of your password.\n\nThen click OK.");
+  let passwordLength = parseFloat(lengthPrompt);
+  console.log("passwordLength: " + passwordLength);
+  
+  if (!(passwordLength > 9) || !(passwordLength < 65) || !Number.isInteger(passwordLength)) {
     alert("That is an invalid choice. Please try again.");
   } else {
+    
     let specialConfirm = confirm("Would you like to include special characters (e.g. $@%&*)?\n\nClick OK for Yes and Cancel for No.")
     console.log("specialConfirm: " + specialConfirm);
       if (specialConfirm) {
@@ -125,30 +126,28 @@ function getPasswordOptions() {
       }
   }
 
-  console.log(criteriaArray);
+    console.log("Password Length: " + passwordLength);
+    console.log("Criteria Array: " + criteriaArray);
+
+    let passcode = [];
+    for (let i = 0; i < passwordLength; i++) {
+      let passwordCharacter  = criteriaArray[Math.floor(Math.random()*criteriaArray.length)];
+      passcode.push(passwordCharacter)
+  }
+    console.log("passcode.join: " + passcode.join(""));
+    var final = passcode.join("")
+    console.log("Final: " + final);
+    return final;
 }
 
 
-  // Function for getting a random element from an array
-  function getRandom(arr) {
- 
-  }
-
-  // Function to generate password with user input
-  function generatePassword() {
-    getPasswordOptions();
-  
-  
-
-  }
-
   // Get references to the #generate element
-  var generateBtn = document.querySelector('#generate');
+  let generateBtn = document.querySelector('#generate');
 
   // Write password to the #password input
   function writePassword() {
-    var password = generatePassword();
-    var passwordText = document.querySelector('#password');
+    let password = generatePassword();
+    let passwordText = document.querySelector('#password');
 
     passwordText.value = password;
   }
@@ -156,3 +155,4 @@ function getPasswordOptions() {
   // Add event listener to generate button
   generateBtn.addEventListener('click', writePassword);
 
+ 
