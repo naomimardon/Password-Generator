@@ -105,42 +105,50 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
+
+  //Resets passcode and criteriaArray each time a new password is generated
   let passcode = [];
   let criteriaArray = [];
+
+  //Prompt to determine length of password
   let lengthPrompt = prompt("Type a number between 10 and 64 to choose the length of your password.\n\nThen click OK.");
   let passwordLength = parseFloat(lengthPrompt);
   console.log("passwordLength: " + passwordLength);
 
+  //Returns an error message if the entry is invalid
   if (!(passwordLength > 9) || !(passwordLength < 65) || !Number.isInteger(passwordLength)) {
       alert("That is an invalid choice. Please try again.");
   } else {
-
+      //confirm whether or not to include special characters 
       let specialConfirm = confirm("Would you like to include special characters (e.g. $@%&*)?\n\nClick OK for Yes and Cancel for No.")
       console.log("specialConfirm: " + specialConfirm);
       if (specialConfirm) {
           criteriaArray = criteriaArray.concat(getPasswordOptions(specialCharacters));
+          //selects one character from the specialCharacters array at random, ensuring it is included in the final password if the user has chosen this option
           passcode.push(getRandom(specialCharacters));
       }
-
+      //confirm whether or not to include numerical characters
       let numberConfirm = confirm("Would you like to include numbers (e.g. 01234)?\n\nClick OK for Yes and Cancel for No.");
       console.log("numberConfirm: " + numberConfirm);
       if (numberConfirm) {
           criteriaArray = criteriaArray.concat(getPasswordOptions(numericCharacters));
-          getRandom(numericCharacters);
+          //selects one character from the numericalCharacters array at random, ensuring it is included in the final password if the user has chosen this option
           passcode.push(getRandom(numericCharacters));
       }
-
+      //confirm whether or not to include lower cased characters
       let lowerConfirm = confirm("Would you like to include lower case letters (e.g abcde)?\n\nClick OK for Yes and Cancel for No.");
       console.log("lowerConfirm: " + lowerConfirm);
       if (lowerConfirm) {
           criteriaArray = criteriaArray.concat(getPasswordOptions(lowerCasedCharacters));
+          //selects one character from the lowerCasedCharacters array at random, ensuring it is included in the final password if the user has chosen this option
           passcode.push(getRandom(lowerCasedCharacters));
       }
-
+      //confirm whether or not to include upper cased characters
       let upperConfirm = confirm("Would you like to include upper case letters (e.g. ABCDE)?\n\nClick OK for Yes and Cancel for No.");
       console.log("upperConfirm: " + upperConfirm);
       if (upperConfirm) {
           criteriaArray = criteriaArray.concat(getPasswordOptions(upperCasedCharacters));
+          //selects one character from the upperCasedCharacters array at random, ensuring it is included in the final password if the user has chosen this option
           passcode.push(getRandom(upperCasedCharacters));
       }
   }
@@ -148,13 +156,11 @@ function generatePassword() {
 
   let passcodeLength = passcode.length;
 
-
   console.log("Criteria Array: " + criteriaArray);
  
   console.log("Passcode Length containing single chosen characters: " + passcodeLength);
 
-
-
+  //selects the remaining characters at random from an array of all characters chosen by the user and adds them to the single characters randomly selected above
   for (let i = 0; i < passwordLength-passcodeLength; i++) {
       passcode.push(getRandom(criteriaArray));
 }
