@@ -1,5 +1,5 @@
 // Array of special characters to be included in password
-var specialCharacters = [
+let specialCharacters = [
   '@',
   '%',
   '+',
@@ -26,10 +26,10 @@ var specialCharacters = [
 ];
 
 // Array of numeric characters to be included in password
-var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+let numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
 // Array of lowercase characters to be included in password
-var lowerCasedCharacters = [
+let lowerCasedCharacters = [
   'a',
   'b',
   'c',
@@ -59,7 +59,7 @@ var lowerCasedCharacters = [
 ];
 
 // Array of uppercase characters to be included in password
-var upperCasedCharacters = [
+let upperCasedCharacters = [
   'A',
   'B',
   'C',
@@ -88,11 +88,13 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-let criteriaArray = [];
 
 
-// Function to prompt user for password options
+
+
 function generatePassword() {
+  let criteriaArray = [];
+
   let lengthPrompt = prompt("Type a number between 10 and 64 to choose the length of your password.\n\nThen click OK.");
   let passwordLength = parseFloat(lengthPrompt);
   console.log("passwordLength: " + passwordLength);
@@ -135,7 +137,7 @@ function generatePassword() {
       passcode.push(passwordCharacter)
   }
     console.log("passcode.join: " + passcode.join(""));
-    var final = passcode.join("")
+    let final = passcode.join("")
     console.log("Final: " + final);
     return final;
 }
