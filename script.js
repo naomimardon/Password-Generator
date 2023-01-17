@@ -94,6 +94,7 @@ let upperCasedCharacters = [
 
 function generatePassword() {
   let criteriaArray = [];
+  let passcode = [];
 
   let lengthPrompt = prompt("Type a number between 10 and 64 to choose the length of your password.\n\nThen click OK.");
   let passwordLength = parseFloat(lengthPrompt);
@@ -107,35 +108,55 @@ function generatePassword() {
     console.log("specialConfirm: " + specialConfirm);
       if (specialConfirm) {
         criteriaArray = criteriaArray.concat(specialCharacters);
+        let passwordCharacter  = specialCharacters[Math.floor(Math.random()*specialCharacters.length)];
+        passcode.push(passwordCharacter);
+        console.log(passcode);
       }
 
     let numberConfirm = confirm("Would you like to include numbers (e.g. 01234)?\n\nClick OK for Yes and Cancel for No.");
     console.log("numberConfirm: " + numberConfirm);
       if (numberConfirm) {
         criteriaArray = criteriaArray.concat(numericCharacters);
+        let passwordCharacter  = numericCharacters[Math.floor(Math.random()*numericCharacters.length)];
+        passcode.push(passwordCharacter);
+        console.log(passcode);
       }
 
     let lowerConfirm = confirm("Would you like to include lower case letters (e.g abcde)?\n\nClick OK for Yes and Cancel for No.");
     console.log("lowerConfirm: " + lowerConfirm);
       if (lowerConfirm) {
         criteriaArray = criteriaArray.concat(lowerCasedCharacters);
+        let passwordCharacter  = lowerCasedCharacters[Math.floor(Math.random()*lowerCasedCharacters.length)];
+        passcode.push(passwordCharacter);
+        console.log(passcode);
       }
 
     let upperConfirm = confirm("Would you like to include upper case letters (e.g. ABCDE)?\n\nClick OK for Yes and Cancel for No.");
     console.log("upperConfirm: " + upperConfirm);
       if (upperConfirm) {
         criteriaArray = criteriaArray.concat(upperCasedCharacters);
+        let passwordCharacter  = upperCasedCharacters[Math.floor(Math.random()*upperCasedCharacters.length)];
+        passcode.push(passwordCharacter);
+        console.log(passcode);
       }
   }
 
+    let passcodeLength = passcode.length;
+
     console.log("Password Length: " + passwordLength);
     console.log("Criteria Array: " + criteriaArray);
+    console.log("Passcode: " + passcode);
+    console.log("Passcode Length: " + passcodeLength);
+    console.log("passwordLength type: " + typeof passwordLength);
+    console.log("Passcode Length type: " + typeof passcodeLength);
+    console.log("Password Length - passcode.length: " + passwordLength --- passcodeLength);
 
-    let passcode = [];
-    for (let i = 0; i < passwordLength; i++) {
+
+    for (let i = 0; i < passwordLength-passcodeLength+1; i++) {
       let passwordCharacter  = criteriaArray[Math.floor(Math.random()*criteriaArray.length)];
       passcode.push(passwordCharacter)
   }
+    console.log("passcode: " + passcode);
     console.log("passcode.join: " + passcode.join(""));
     let final = passcode.join("")
     console.log("Final: " + final);
